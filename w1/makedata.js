@@ -12,7 +12,7 @@ let args = process.argv
 //         return args[i + 1]
 //     })
 
-let nameArr = args.map((arg, i) => {
+let nameArr1 = args.map((arg, i) => {
     if (arg === '-n') {
         return args[i + 1]
     }
@@ -25,4 +25,4 @@ let nameArr = args.map((arg, i) => {
 // filter: [ 'abc', '456' ]
 // reduce:
 
-console.log("-n array: ", nameArr)
+console.log("-n array: ", nameArr1)
