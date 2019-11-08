@@ -5,14 +5,13 @@ Javascript and Nodejs
 1. Frontend, and what is backend?
 2. Basic app with node
 
-
 #### IO
 
   - stdin
   - stdout
   - stderr
 
-#### Work:
+#### Work
 
 Make a simple CLI
 
@@ -25,6 +24,9 @@ Make a simple CLI
   - `async/await`
 
   #### Work
+
+  The simple CLI *(.cont)*
+
   - REQ2: having a `file path` parameter, `-f <file path>` (optional long form: `--file-path <file path>`)
   - REQ3: create `.json` file at `file path`
 
