@@ -25,7 +25,7 @@ let nameArr = args.map((arg, i) => {
 //example input array: ["node", "srcPath", "-n", "abc", "-2", "12", "-n", "456", "-b", "7", "-n", "-a"]
 //output: ["abc", "456"]
 let tempArr = test.reduce((rs, itm, idx) => {
-    if (itm === '-n' && (idx + 1) < test.length && test[idx+1].indexOf('-') !== 0) rs.push(test[idx+1]);
+    if (itm === '-n' && (idx + 1) < test.length && !test[idx+1].startsWith('-')) rs.push(test[idx+1]);
     return rs;
   }, []);
 
