@@ -32,7 +32,7 @@ Make a simple CLI
 
 ```json
 {
-    "name": "${name}"
+  "name": "${name}"
 }
 ```
 

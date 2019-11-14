@@ -1,49 +1,13 @@
 let args = process.argv
 
-// let take our parameters
-// FIXME: make it cool
-// FIXME: validate command for incorrect command
-// let nameArr = args.filter(arg => {
-//         console.log(arg, arg === '-n') // <--
-//         return arg === '-n'
-//     })
-//     .map((arg, i) => {
-//         console.log(i,arg)
-//         return args[i + 1]
-//     })
+let isValidKey = (idx, arr) => (idx) < arr.length && !arr[idx].startsWith('-')
 
-// let nameArr = args.map((arg, i) => {
-//     if (arg === '-n') {
-//         return args[i + 1]
-//     }
+function getKeyValue(key, arrs) {
+  arrs.filter((arg, i) => {
+    return arrs[i - 1] === `-${key}` && isValidKey(i, arrs)
+  })
+}
 
-//     return null
-// }).filter(it => !!it)
-
-
-// YeuChesen: check validation for (index + 1) > array length and after "-n" is "-***" 
-//example input array: ["node", "srcPath", "-n", "abc", "-2", "12", "-n", "456", "-b", "7", "-n", "-a"]
-//output: ["abc", "456"]
-let tempArr = test.reduce((rs, itm, idx) => {
-    if (itm === '-n' && (idx + 1) < test.length && !test[idx+1].startsWith('-')) rs.push(test[idx+1]);
-    return rs;
-  }, []);
-
-// => node srcPath -n abc -2 12 -n 456 -b 7
-// map: nul nul abc nul nul 456 nul nul
-// filter: [ 'abc', '456' ]
-// reduce:
-
-// console.log("-n array: ", nameArr)
-// let temp = [];
-
-//  let nameArr = args.filter((arg, i) => {
-//     if (arg === '-n' && args[i+1]) {
-//         temp.push(args[i + 1])
-//     }
-//     return arg;
-//  })
-//  console.log("-n array: ", temp)
-
-let nameArr = args.filter((arg, i) => args[i - 1] === '-n')
-console.log("-n array: ", nameArr)
+module.exports = {
+  getKeyValue
+}
