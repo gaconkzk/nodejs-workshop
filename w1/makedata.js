@@ -12,13 +12,13 @@ let args = process.argv
 //         return args[i + 1]
 //     })
 
-let nameArr = args.map((arg, i) => {
-    if (arg === '-n') {
-        return args[i + 1]
-    }
+// let nameArr = args.map((arg, i) => {
+//     if (arg === '-n') {
+//         return args[i + 1]
+//     }
 
-    return null
-}).filter(it => !!it)
+//     return null
+// }).filter(it => !!it)
 
 
 // YeuChesen: check validation for (index + 1) > array length and after "-n" is "-***" 
@@ -34,4 +34,16 @@ let tempArr = test.reduce((rs, itm, idx) => {
 // filter: [ 'abc', '456' ]
 // reduce:
 
+// console.log("-n array: ", nameArr)
+// let temp = [];
+
+//  let nameArr = args.filter((arg, i) => {
+//     if (arg === '-n' && args[i+1]) {
+//         temp.push(args[i + 1])
+//     }
+//     return arg;
+//  })
+//  console.log("-n array: ", temp)
+
+let nameArr = args.filter((arg, i) => args[i - 1] === '-n')
 console.log("-n array: ", nameArr)
