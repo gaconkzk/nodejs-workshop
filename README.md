@@ -19,6 +19,7 @@ Make a simple CLI
 
 ### Week 2:
 
+  #### TODO fixing
   #### IO
   - files
   - `async/await`
@@ -38,4 +39,14 @@ Make a simple CLI
 
 ### Week 3:
 
-TBA
+  #### TODO fixing
+  #### Modules
+  - Module types
+  - Net
+  
+  #### Work
+  
+  - CLI terminal chat
+  
+  
+  
