@@ -39,12 +39,6 @@ Make a simple CLI
 
 ### Week 3:
 
-<<<<<<< HEAD
-TBA
-aa
-
-YAX
-=======
   #### TODO fixing
   #### Modules
   - Module types
@@ -54,6 +48,3 @@ YAX
   
   - CLI terminal chat
   
-  
-  
->>>>>>> upstream/master
