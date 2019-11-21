@@ -19,6 +19,7 @@ Make a simple CLI
 
 ### Week 2:
 
+  #### TODO fixing
   #### IO
   - files
   - `async/await`
@@ -32,13 +33,27 @@ Make a simple CLI
 
 ```json
 {
-    "name": "${name}"
+  "name": "${name}"
 }
 ```
 
 ### Week 3:
 
+<<<<<<< HEAD
 TBA
 aa
 
 YAX
+=======
+  #### TODO fixing
+  #### Modules
+  - Module types
+  - Net
+  
+  #### Work
+  
+  - CLI terminal chat
+  
+  
+  
+>>>>>>> upstream/master
