@@ -4,12 +4,21 @@ class Router {
         this.res = res
     }
 
-    get(url, handler) {
-        if (this.req.url === url && this.req.method.toLowerCase() === 'get') {
+    resolve(method,url, handler ){
+        if (this.req.url === url && this.req.method.toLowerCase() === method) {
             handler(this.req, this.res)
         } else {
-            this.res.end('not found')
+            this.res.end(`${method} not found `)
         }
+    }
+    get(url, handler) {
+        this.resolve('get',url,handler)
+    }
+    post(url, handler) {
+        this.resolve('post',url,handler)
+    }
+    delete(url, handler) {
+        this.resolve('delete',url,handler)
     }
 
     // TODO implement post, delete methods without duplicated code
