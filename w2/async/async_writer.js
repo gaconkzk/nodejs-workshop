@@ -7,7 +7,17 @@ const writeFile = util.promisify(fs.writeFile)
 async function write(filepath, data) {
     // TODO validate filepath, is it file, is it dir
     // throw error if not a valid file path
-    await writeFile(filepath, data)
+    try {
+        if (fs.existsSync(filepath) && fs.lstatSync(filepath).isFile()) {
+        
+            await writeFile(filepath, data)
+            console.log("Writing success")
+        } else {
+            throw new Error('Invalid file path')
+        }
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = {

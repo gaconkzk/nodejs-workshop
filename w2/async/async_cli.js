@@ -9,14 +9,21 @@ const start = () => {
     let file = parser.getValueByKey('f', args)
 
     //TODO error if name/file not input
+    try {
+        if (!!name && !!file) {
+            // processing
+            let data = JSON.stringify({ name }, null, 2);
+            
+            //TODO handling result / error
+            // print `OK` if success
+            writer.write(file, data)
+        } else {
+            throw new Error("name/file not input")
+        }
+    } catch (error) {
+        console.log(error)
+    }
     
-    // processing
-    let data = JSON.stringify({ name }, null, 2);
-    
-    let a = 5;
-    //TODO handling result / error
-    // print `OK` if success
-    writer.write(file, data)
 }
 
 start()
