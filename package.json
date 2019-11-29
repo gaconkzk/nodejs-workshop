@@ -1,0 +1,27 @@
+{
+  "name": "nodejs-workshop",
+  "version": "1.0.0",
+  "description": "Learning nodejs and application creation",
+  "scripts": {
+    "w2:run": "node w2/cli.js -- -n a -f abc.txt",
+    "helpme": "ls -la",
+    "prehelpme": "echo pre",
+    "posthelpme": "echo post",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "w4:denv": "node w4/testdotenv.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaconkzk/nodejs-workshop.git"
+  },
+  "keywords": [
+    "learn",
+    "nodejs"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "yargs": "^15.0.2"
+  },
+  "devDependencies": {}
+}
