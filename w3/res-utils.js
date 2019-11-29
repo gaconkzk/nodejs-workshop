@@ -5,8 +5,15 @@ const resolve = path.resolve
 const staticPath = resolve(__dirname, 'public')
 
 const redirectTo = (page) => {
-    let indexFile = fs.readFileSync(resolve(staticPath, page))
-    return indexFile
+    
+    try {
+        let file = fs.readFileSync(resolve(staticPath, page))
+        return file
+    } catch (error) {
+        console.log(error)
+        return 'Can\'t load page'
+    }
+   
 }
 
 module.exports = {

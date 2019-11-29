@@ -18,10 +18,9 @@ const OPTION = 'option'
 //create a server object:
 http.createServer(function (req, res) {
     let router = new Router(req, res)
-    
     router.add(GET, '/', indexHandler)
     router.add(GET, '/about', (req, res) => res.end(resUtils.redirectTo('about.html')))
-    router.add(GET, '/test', (req, res) => res.end(resUtils.redirectTo('test-return-page.html')))
+    router.add(GET, '/test', (req, res) => res.end(resUtils.redirectTo('test-return-pa.html')))
     router.add(POST, '/api/data', (req, res) => res.end('post method'))
     router.add(DELETE, '/api/delete', (req, res) => res.end('delete method'))
     router.handleRequest()
