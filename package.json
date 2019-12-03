@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Learning nodejs and application creation",
   "scripts": {
-    "w2:run": "node w2/cli.js -- -n a -f abc.txt",
+    "w2:run": "node w2/async/async_cli.js",
     "helpme": "ls -la",
     "prehelpme": "echo pre",
     "posthelpme": "echo post",
