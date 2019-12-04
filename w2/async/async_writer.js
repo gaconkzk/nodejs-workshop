@@ -7,9 +7,10 @@ const writeFile = util.promisify(fs.writeFile)
 
 // simple writer
 async function write(filepath, data) {
-    await writeFile(realPath(filepath), data)
+  await writeFile(realPath(filepath), data)
 }
 
 module.exports = {
-    write
+  write
 }
+

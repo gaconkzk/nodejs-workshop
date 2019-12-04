@@ -13,9 +13,9 @@ const indexHandler = require('./indexHandler.js')
 http.createServer(function (req, res) {
     let router = new Router(req, res)
     
-    router.get('/', indexHandler)
-    router.post('/api/data', (req, res) => res.send('abc'))
-    router.delete('/api/delete', (req, res) => res.send('delete'))
+    //router.get('/', indexHandler)
+    router.post('/api/data', indexHandler)
+    //router.delete('/api/delete', indexHandler)
 
     // if (req.url === '/api') {
     //     res.end('api 1')

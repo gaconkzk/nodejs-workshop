@@ -11,4 +11,9 @@ let file = parser.getValueByKey('f', args)
 let data = JSON.stringify({ name }, null, 2);
 
 // handling result
-writer.write(file, data)
+try{
+    writer.write(file, data)
+}
+ catch(e){
+    console.log(e);
+}
