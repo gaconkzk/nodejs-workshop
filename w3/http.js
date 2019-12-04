@@ -18,4 +18,4 @@ router.addAll(routes)
 
 // create a server object
 // binding router to replace http server context
-http.createServer(router.handle.bind(router)).listen(9999)
+http.createServer(router.handle).listen(9999)

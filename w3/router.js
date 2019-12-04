@@ -20,6 +20,9 @@ class Router {
         this._add(m, path, handler)
       }
     })
+
+    // we need binding to keep the router context in other places
+    this.handle = this.handle.bind(this)
   }
 
   _add(method, path, handler) {
@@ -41,13 +44,13 @@ class Router {
     this.routes.push(...routeArr)
   }
 
-  handle(req, res) {
+  async handle(req, res) {
     const method = req.method.toLowerCase()
     const path = req.url
     let matcher = match(method, path)
     const route = this.routes.find(matcher)
     if (route) {
-      route.handler(req, res)
+      await route.handler(req, res)
     } else {
       res.statusCode = 404
       res.statusMessage = 'Not found'
