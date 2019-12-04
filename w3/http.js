@@ -5,24 +5,17 @@ var http = require('http');
 // - routers
 // - handler
 //
+const Router = require('./router.js')
 
-const Router = require('router.js')
-const indexHandler = require('./indexHandler.js')
-const resUtils = require('./res-utils')
-const GET = 'get'
-const POST = 'post'
-const DELETE = 'delete'
-const PUSH = 'push'
-const OPTION = 'option'
+let router = new Router()
+let routes = require('./routes.js')
 
-//create a server object:
-http.createServer(function (req, res) {
-    let router = new Router(req, res)
+// sample single route
+router.get('/hello', (_, res) => res.end('hello from http'))
+router.post('/api/data', (_, res) => res.end('okie i received'))
 
-    router.add(GET, '/', indexHandler)
-    router.add(GET, '/about', (req, res) => res.end(resUtils.redirectTo('about.html')))
-    router.add(GET, '/test', (req, res) => res.end(resUtils.redirectTo('test-return-pa.html')))
-    router.add(POST, '/api/data', (req, res) => res.end('post method'))
-    router.add(DELETE, '/api/delete', (req, res) => res.end('delete method'))
-    router.handleRequest()
-}).listen(9999); //the server object listens on port 8080
+router.addAll(routes)
+
+// create a server object
+// binding router to replace http server context
+http.createServer(router.handle.bind(router)).listen(9999)
