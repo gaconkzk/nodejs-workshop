@@ -6,8 +6,7 @@ const staticPath = resolve(__dirname, 'public')
 
 const h = (req, res) => {
     let indexFile = fs.readFileSync(resolve(staticPath, 'index.html'))
-    res.write(indexFile)
-    res.end()
+    res.end(indexFile)
 }
 
 module.exports = h
