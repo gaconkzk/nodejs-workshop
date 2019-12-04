@@ -2,9 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const util = require('util')
 
-const readline = require('readline')
-
-const { realPath, question } = require('./utils.js')
+const { realPath, ask } = require('./utils.js')
 
 const exists = util.promisify(fs.exists)
 
@@ -20,16 +18,12 @@ const fileValidator = async (filepath) => {
   }
 
   let fileExisted = await exists(abspath)
-  let answer = null
-  if (fileExisted) {
-    const rl = readline.createInterface({ input: process.stdin , output: process.stdout })
-    answer = await question(rl, `You are override the origin file: ${abspath} (Y/N)`)
-    rl.close()
-  }
+  let answer = fileExisted &&
+    await ask(`You are overriding the origin file: ${abspath}\n'Y' to continue(Y/N)`)
 
-  if (answer.toLowerCase() === 'n') {
+  if (answer && answer.toLowerCase() === 'n') {
     console.log('Canceled!')
-    process.exit(-2)
+    process.exit(-1)
   }
 
   return !answer || answer.toLowerCase() === 'y'
