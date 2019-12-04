@@ -38,15 +38,20 @@ Make a simple CLI
 ```
 
 ### Week 3:
-
   #### TODO fixing
   #### Modules
   - Module types
+  #### Net/Http
   - Net
+  - Http
   
   #### Work
+  - Http router/route
   
-  - CLI terminal chat
-  
-  
+  ### Week 4:
+
+    #### TODO fixing
+    #### npm and package.json
+    #### my real project
+    ##### TBA
   

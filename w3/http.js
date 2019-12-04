@@ -6,7 +6,7 @@ var http = require('http');
 // - handler
 //
 
-const Router = require('./router.js')
+const Router = require('router.js')
 const indexHandler = require('./indexHandler.js')
 
 //create a server object:
