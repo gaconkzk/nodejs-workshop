@@ -8,16 +8,14 @@ let name = parser.getValueByKey('n', args)
 let file = parser.getValueByKey('f', args)
 
 try {
-    if (!!name && !!file) {
+  if (!!name && !!file) {
     // processing
     let data = JSON.stringify({ name }, null, 2);
-
-    // handling result
+     // handling result
     writer.write(file, data)
-    } else {
-        throw new Error("name/file not input")
-    }
+  } else {
+    throw new Error("name/file not input")
+  }
 } catch (error) {
-    console.log(error)
+  console.log(error)
 }
-

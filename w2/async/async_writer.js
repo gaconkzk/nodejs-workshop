@@ -1,25 +1,15 @@
 const fs = require('fs')
 const util = require('util')
 
+const { realPath } = require('./utils.js')
+
 const writeFile = util.promisify(fs.writeFile)
 
 // simple writer
 async function write(filepath, data) {
-    // TODO validate filepath, is it file, is it dir
-    // throw error if not a valid file path
-    try {
-        if (fs.existsSync(filepath) && fs.lstatSync(filepath).isFile()) {
-        
-            await writeFile(filepath, data)
-            console.log("Writing success")
-        } else {
-            throw new Error('Invalid file path')
-        }
-    } catch (error) {
-        console.log(error)
-    }
+  await writeFile(realPath(filepath), data)
 }
 
 module.exports = {
-    write
+  write
 }
