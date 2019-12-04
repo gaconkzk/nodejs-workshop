@@ -44,14 +44,18 @@ Make a simple CLI
   #### Net/Http
   - Net
   - Http
-  
+
   #### Work
   - Http router/route
-  
-  ### Week 4:
 
-    #### TODO fixing
-    #### npm and package.json
-    #### my real project
-    ##### TBA
-  
+### Week 4:
+  #### TODO fixing
+  #### npm and package.json
+  #### my real project
+  ##### TBA
+
+### Week 5:
+  #### TODO and Refactoring review
+  #### Database
+  #### Regex matcher for router
+  #### TBA
