@@ -1,4 +1,3 @@
-const indexHandler = require('./indexHandler.js')
 const resUtils = require('./res-utils')
 class Routes {
   constructor(dir) {
