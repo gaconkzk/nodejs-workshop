@@ -38,13 +38,24 @@ Make a simple CLI
 ```
 
 ### Week 3:
-
   #### TODO fixing
   #### Modules
   - Module types
+  #### Net/Http
   - Net
-  
+  - Http
+
   #### Work
-  
-  - CLI terminal chat
-  
+  - Http router/route
+
+### Week 4:
+  #### TODO fixing
+  #### npm and package.json
+  #### my real project
+  ##### TBA
+
+### Week 5:
+  #### TODO and Refactoring review
+  #### Database
+  #### Regex matcher for router
+  #### TBA

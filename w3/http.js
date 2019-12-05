@@ -5,21 +5,17 @@ var http = require('http');
 // - routers
 // - handler
 //
-
 const Router = require('./router.js')
-const indexHandler = require('./indexHandler.js')
 
-//create a server object:
-http.createServer(function (req, res) {
-    let router = new Router(req, res)
-    
-    //router.get('/', indexHandler)
-    router.post('/api/data', indexHandler)
-    //router.delete('/api/delete', indexHandler)
+let router = new Router()
+let routes = require('./routes.js')
 
-    // if (req.url === '/api') {
-    //     res.end('api 1')
-    // } else {
-    //     res.end('not found')
-    // }
-}).listen(8080); //the server object listens on port 8080
+// sample single route
+router.get('/hello', (_, res) => res.end('hello from http'))
+router.post('/api/data', (_, res) => res.end('okie i received'))
+
+router.addAll(routes)
+
+// create a server object
+// binding router to replace http server context
+http.createServer(router.handle).listen(9999)

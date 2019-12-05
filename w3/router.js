@@ -1,27 +1,62 @@
+const GET = 'get'
+const POST = 'post'
+const DELETE = 'delete'
+const PUSH = 'push'
+const OPTION = 'option'
+
+const methods = [GET, POST, DELETE, PUSH, OPTION]
+
+// TODO use regex to match path instead of equally checking
+function match(method, path) {
+  return (itm) => itm.method === method && itm.path === path
+}
+
 class Router {
-    constructor(req, res) {
-        this.req = req
-        this.res = res
-    }
+  constructor() {
+    this.routes = []
+    // make alias functions
+    methods.forEach(m => {
+      this[m] = (path, handler) => {
+        this._add(m, path, handler)
+      }
+    })
 
-    resolve(method,url, handler ){
-        if (this.req.url === url && this.req.method.toLowerCase() === method) {
-            handler(this.req, this.res)
-        } else {
-            this.res.end(`${method} not found `)
-        }
-    }
-    get(url, handler) {
-        this.resolve('get',url,handler)
-    }
-    post(url, handler) {
-        this.resolve('post',url,handler)
-    }
-    delete(url, handler) {
-        this.resolve('delete',url,handler)
-    }
+    // we need binding to keep the router context in other places
+    this.handle = this.handle.bind(this)
+  }
 
-    // TODO implement post, delete methods without duplicated code
+  _add(method, path, handler) {
+    let matcher = match(method, path)
+    const isExist = this.routes.some(matcher)
+    if (!isExist) {
+      const route = { method, path, handler }
+      this.routes.push(route)
+    } else {
+      throw new Error(`${method}: ${path} already existed`)
+    }
+  }
+
+  addAll(routes) {
+    let routeArr = routes.map(r => Object.assign({ method: 'get' }, r))
+    // check existed and throw error
+    let existed = this.routes.find(r => !!routeArr.find(it => it.method === r.method && it.path === r.path))
+    if (existed) throw new Error(`${existed.method}: ${existed.path} already existed`)
+    this.routes.push(...routeArr)
+  }
+
+  async handle(req, res) {
+    const method = req.method.toLowerCase()
+    const path = req.url
+    let matcher = match(method, path)
+    const route = this.routes.find(matcher)
+    if (route) {
+      await route.handler(req, res)
+    } else {
+      res.statusCode = 404
+      res.statusMessage = 'Not found'
+      res.end('Page not found')
+    }
+  }
 }
 
 module.exports = Router
