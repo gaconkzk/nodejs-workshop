@@ -1,4 +1,4 @@
-require('dotenv').config({path:__dirname+'/./../.env'})
+require('dotenv').config()
 console.log(
     process.env.MY_NAME || 'no environment is defined'
 )
