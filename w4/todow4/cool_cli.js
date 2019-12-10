@@ -1,4 +1,4 @@
-require('dotenv').config({path:__dirname+'/./../../.env'})
+require('dotenv').config()
 const server = require('./http')
 const argvItems = require('./argv-items')
 const commonUtils = require('./common-utils')
@@ -11,9 +11,11 @@ const argv = require('yargs') // eslint-disable-line
    console.log(argv.port, argv.ip, argv.folder)
     let svrInfo = commonUtils.serverInfo(argv.port, argv.ip, argv.folder); 
 
+
     server.startServer(svrInfo.port, svrInfo.ip, svrInfo.folder);
    
     console.log(`Server started: \n  - On port: ${svrInfo.port} \n  - External IP ${svrInfo.ip} \n  - Folder: ${svrInfo.folder}`);
+
 
 // TODO create cli to start an http server
 // cli params:

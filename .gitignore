@@ -3,3 +3,5 @@ log.txt
 node_modules/
 
 **/test/
+
+.env
