@@ -3,6 +3,9 @@ const POST = 'post'
 const DELETE = 'delete'
 const PUSH = 'push'
 const OPTION = 'option'
+const fs = require('fs')
+const path = require('path')
+const resolve = path.resolve
 
 const methods = [GET, POST, DELETE, PUSH, OPTION]
 
@@ -49,12 +52,36 @@ class Router {
     const path = req.url
     let matcher = match(method, path)
     const route = this.routes.find(matcher)
-    if (route) {
-      await route.handler(req, res)
-    } else {
-      res.statusCode = 404
-      res.statusMessage = 'Not found'
-      res.end('Page not found')
+    try{
+      let stat=''
+      const staticPath = resolve(`${__dirname}${req.url}`)
+      if(fs.existsSync(staticPath)){
+      stat = fs.lstatSync(staticPath)
+      }
+      if (route) {
+        await route.handler(req, res)
+      } 
+      else if (stat.isDirectory()) {
+        let files = fs.readdirSync(staticPath)
+        let rs = "<html>"
+        for (var i in files) {
+          rs += `<a href="${path}/${files[i]}"> ${files[i]} </a> <br>`
+        }
+        rs += "</html>"
+        res.end(rs)
+      } else if (stat.isFile()) {
+          let file = fs.readFileSync(staticPath)
+          res.end(file)
+      }
+      else {
+        res.statusCode = 404
+        res.statusMessage = 'Not found'
+      }
+    }
+    catch (error) {
+      console.log(error)
+      return res.end('Can\'t load path')
+      
     }
   }
 }
