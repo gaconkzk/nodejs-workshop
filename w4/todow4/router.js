@@ -4,8 +4,11 @@ const DELETE = 'delete'
 const PUSH = 'push'
 const OPTION = 'option'
 
-const methods = [GET, POST, DELETE, PUSH, OPTION]
+const fs = require("fs"); 
+const pathRoot = require('path');
 
+const methods = [GET, POST, DELETE, PUSH, OPTION]
+const folderUtils = require('./folder-util')
 // TODO use regex to match path instead of equally checking
 function match(method, path) {
   return (itm) => itm.method === method && itm.path === path
@@ -48,13 +51,25 @@ class Router {
     const method = req.method.toLowerCase()
     const path = req.url
     let matcher = match(method, path)
+    console.log(path.slice(1));
     const route = this.routes.find(matcher)
     if (route) {
       await route.handler(req, res)
     } else {
-      res.statusCode = 404
-      res.statusMessage = 'Not found'
-      res.end('Page not found')
+      const a = await folderUtils.checkFile(path.slice(1));
+      if (a === false) {
+        // const directoryPath = pathRoot.join(__dirname, path.slice(1));
+        const files = fs.readdirSync(path.slice(1));
+        res.statusCode = 200;
+        res.end(files.join(', '));
+      } else if (a === true) {
+        const file = fs.readFileSync(path.slice(1));
+        res.statusCode = 200;
+        res.end(file);
+      } else {
+        res.statusCode = 404;
+        res.end('page not found');
+      }
     }
   }
 }

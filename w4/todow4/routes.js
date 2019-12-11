@@ -18,6 +18,10 @@ class Routes {
         handler: (req, res) => res.end(resUtils.redirectTo(this.dir, 'test-return-page.html'))
       },
       {
+        path: '/anh',
+        handler: (req, res) => res.end(resUtils.redirectTo(this.dir, 'test/anh.html'))
+      },
+      {
         method: 'post',
         path: '/api/post',
         handler: (req, res) => res.end('post method')

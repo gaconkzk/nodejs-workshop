@@ -1,9 +1,10 @@
 var argv = require('yargs')
     .usage('Usage: $0 -w [num] -h [num]')
-    .demandOption(['w','h'])
+    // .demandOption(['w','h'])
     .argv;
 
 console.log("The area is:", argv.w * argv.h);
+console.log(process.env.PORT);
 
 // TODO create cli to start an http server
 // cli params:

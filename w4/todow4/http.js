@@ -12,7 +12,10 @@ startServer = (port, ip, dir) => {
     let routes = new Routes(dir)
     
     // sample single route
-    router.get('/hello', (_, res) => res.end('hello from http'))
+    router.get('/hello', (_, res) => {
+        
+        res.end('hello from http');
+    });
     router.post('/api/data', (_, res) => res.end('okie i received'))
     router.addAll(routes.routes())
     

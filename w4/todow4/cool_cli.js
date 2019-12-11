@@ -16,7 +16,7 @@ const argv = require('yargs') // eslint-disable-line
     })
     .option('folder', {
         alias: '-f',
-        default: process.env.FOLDER,
+        default: 'public',
         type: 'string',
         description: '(The default folder that server will serve static files (default: public)'
     }).help('help')
