@@ -53,34 +53,37 @@ class Router {
     let matcher = match(method, path)
     const route = this.routes.find(matcher)
     try{
-      let stat=''
-      const staticPath = resolve(`${__dirname}${req.url}`)
-      if(fs.existsSync(staticPath)){
-      stat = fs.lstatSync(staticPath)
-      }
       if (route) {
         await route.handler(req, res)
       } 
-      else if (stat.isDirectory()) {
-        let files = fs.readdirSync(staticPath)
-        let rs = "<html>"
-        for (var i in files) {
-          rs += `<a href="${path}/${files[i]}"> ${files[i]} </a> <br>`
-        }
-        rs += "</html>"
-        res.end(rs)
-      } else if (stat.isFile()) {
-          let file = fs.readFileSync(staticPath)
-          res.end(file)
-      }
       else {
         res.statusCode = 404
         res.statusMessage = 'Not found'
       }
+      let stat=''
+      const staticPath = resolve(`${__dirname}${req.url}`)
+      if(fs.existsSync(staticPath)){
+        stat = fs.lstatSync(staticPath)
+        if (stat.isDirectory()) {
+          let files = fs.readdirSync(staticPath)
+          let rs = "<html>"
+          for (var i in files) {
+            rs += `<a href="${path}/${files[i]}"> ${files[i]} </a> <br>`
+          }
+          rs += "</html>"
+          res.end(rs)
+        } else if (stat.isFile()) {
+            let file = fs.readFileSync(staticPath)
+            res.end(file)
+        }
+      }
+      else {
+        return res.end('Path not exist ')
+      }
     }
     catch (error) {
       console.log(error)
-      return res.end('Can\'t load path')
+      return res.end(error)
       
     }
   }
