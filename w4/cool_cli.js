@@ -3,12 +3,11 @@ require('dotenv').config()
 const Server = require('./server.js')
 
 var argv = require('yargs')
-    .usage('Usage: $0 -p [num] -i [ip]')
-    .demandOption(['p','i'])
+    .usage('Usage: $0 -w [num] -h [num]')
+    .demandOption(['w','h'])
     .argv;
 
-    let server = new Server()
-    server.handle((process.env.PORT || argv.p), (process.env.IP || argv.i))
+    console.log("The area is:", argv.w * argv.h);
 
 // TODO create cli to start an http server
 // cli params:

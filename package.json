@@ -10,7 +10,7 @@
     "prehelpme": "echo pre",
     "posthelpme": "echo post",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "w4:denv": "node w4/cool_cli.js"
+    "w4:denv": "node w4/testdotenv.js"
   },
   "repository": {
     "type": "git",
