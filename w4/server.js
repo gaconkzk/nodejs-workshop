@@ -2,24 +2,24 @@
 var net = require('net');
 
 class server {
-	constructor(req, res) {
-        this.req = req
-        this.res = res
+	constructor(port, ip) {
+        this.port = port
+        this.ip = ip
     }
-  async handle(req, res) {
+  async handle(port, ip) {
     var server = net.createServer(function(socket) {
 		socket.write('Echo from server\n');
-		
+
 		socket.on('data', (data) => {
 			console.log(`Server received: ${data}`)
 		})
 	});
-	
+
 	server.on('error', (err) => {
 		throw err
 	})
-	
-	server.listen(req, res);
+
+	server.listen(port, ip);
   }
 }
 
