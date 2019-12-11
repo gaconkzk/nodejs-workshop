@@ -5,6 +5,7 @@
   "scripts": {
     "w2:run": "node w2/async/async_cli.js",
     "w3:run": "nodemon node w3/http.js",
+    "w4:todo": "nodemon node w4/todow4/cool_cli.js",
     "helpme": "ls -la",
     "prehelpme": "echo pre",
     "posthelpme": "echo post",
