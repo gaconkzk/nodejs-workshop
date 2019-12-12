@@ -6,6 +6,7 @@
     "w2:run": "node w2/async/async_cli.js",
     "w3:run": "nodemon node w3/http.js",
     "w4:todo": "nodemon node w4/todow4/cool_cli.js",
+    "w5:run": "node w5/database.js",
     "helpme": "ls -la",
     "prehelpme": "echo pre",
     "posthelpme": "echo post",
@@ -23,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "mongodb": "^3.4.0",
     "yargs": "^15.0.2"
   },
   "devDependencies": {
