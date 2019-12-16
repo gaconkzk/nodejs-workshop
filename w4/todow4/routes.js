@@ -1,7 +1,7 @@
 const resUtils = require('./res-utils')
 class Routes {
-  constructor(dir) {
-    this.dir = dir
+  constructor() {
+    this.dir = './public'
   }
   routes() {
     return [

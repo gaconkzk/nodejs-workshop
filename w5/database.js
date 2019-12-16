@@ -7,7 +7,7 @@ let password = process.env.DB_PASS
 let dbhost = process.env.DB_HOST_PORT
 let database = process.env.DB_NAME
 
-let url = `mongodb://${username}:${password}@${dbhost}/${database}`
+let url = `mongodb://${username}:${encodeURIComponent(password)}@${dbhost}/${database}`
 
 // Create a new MongoClient
 const client = new MongoClient(url, { useUnifiedTopology: true });
@@ -17,7 +17,7 @@ client.connect(function(err) {
   if (err) {
       console.error('Error', err)
   } else {
-    console.log("Connected successfully to server");
+    console.log("Connected successfully to server")
   }
 
 //   const db = client.db(dbName);
@@ -34,5 +34,5 @@ client.connect(function(err) {
       }
    */
 // document sample: https://mongodb.github.io/node-mongodb-native/3.4/quick-start/quick-start/
-  client.close();
-});
+  client.close()
+})
