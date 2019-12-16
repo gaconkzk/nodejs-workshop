@@ -1,4 +1,4 @@
-const { sortRoutes, getRealPath } = require('./common-utils')
+const { sortRoutes } = require('./route-utils')
 const { staticFileHandler, notFoundHandler } = require('./static-route')
 
 const GET = 'get'

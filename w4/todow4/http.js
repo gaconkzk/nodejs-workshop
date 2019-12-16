@@ -5,8 +5,8 @@ var http = require('http');
 // - routers
 // - handler
 //
-const Router = require('./router.js')
-const Routes = require('./routes.js')
+const Router = require('./router')
+const Routes = require('./router/routes.js')
 
 start = async ({port, ip, folder}) => {
   let router = new Router()
@@ -23,7 +23,11 @@ start = async ({port, ip, folder}) => {
 
   // create a server object
   // binding router to replace http server context
-  http.createServer(router.handle).listen(port, ip)
+  server = http.createServer(router.handle).listen(port, ip, err => {
+    if (!err) {
+      console.log(`Server started: \n  - On port: ${port} \n  - External IP ${ip} \n  - Folder: ${folder}`)
+    }
+  })
 }
 
 module.exports = { start }

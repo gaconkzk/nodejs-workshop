@@ -1,7 +1,8 @@
-const resUtils = require('./res-utils')
+const path = require('path')
+const resUtils = require('./route-utils')
 class Routes {
   constructor() {
-    this.dir = './public'
+    this.dir = path.resolve(process.cwd(), 'w4/todow4/public')
   }
   routes() {
     return [

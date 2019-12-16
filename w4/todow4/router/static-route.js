@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const map = require('./file-ext-map')
-const { getExtName, isExistPath } = require('./common-utils')
+const { getExtName, isExistPath } = require('./route-utils')
 
 const notFoundHandler = (_, res) => {
   res.statusCode = 404
@@ -31,8 +31,7 @@ const staticFileHandler = (folder, baseUrl) => {
   return (req, res) => {
     // remove the baseUrl part
     let rpath = req.url.slice(req.url.indexOf(baseUrl)+baseUrl.length)
-    let realPath = path.join(__dirname, folder, rpath)
-
+    let realPath = path.join(process.cwd(), folder, rpath)
     if (isExistPath(realPath)) {
       let temp = loadFileByPath(realPath)
       if (!temp) {

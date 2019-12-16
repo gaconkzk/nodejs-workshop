@@ -8,8 +8,7 @@ const checkIp = (ip) => {
 }
 
 const checkFolderExist = (dir) => {
-  const staticPath = resolve(__dirname, dir)
-  console.log(staticPath)
+  const staticPath = resolve(process.cwd(), dir)
   return fs.existsSync(staticPath)
 }
 
@@ -17,15 +16,21 @@ const checkPort = (port) => {
   return /^\d+$/.test(port);
 }
 
-function validate(data) {
-  return checkPort(data.port) &&
-         checkIp(data.ip) &&
-         checkFolderExist(data.folder)
+function invalidate(data) {
+  const server = {}
+  // initialize data based on input config
+  server.port = data.port || process.env.PORT
+  server.ip = data.ip || process.env.IP
+  server.folder = data.folder || process.env.FOLDER
+
+  return checkPort(server.port) &&
+         checkIp(server.ip) &&
+         checkFolderExist(server.folder) && server
 }
 
 module.exports = {
   checkIp,
   checkFolderExist,
   checkPort,
-  validate
+  invalidate
 }
