@@ -8,8 +8,7 @@ const checkIp = (ip) => {
 }
 
 const checkFolderExist = (dir) => {
-  const staticPath = resolve(process.cwd(), dir)
-  return fs.existsSync(staticPath)
+  return fs.existsSync(dir)
 }
 
 const checkPort = (port) => {

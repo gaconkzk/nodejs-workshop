@@ -18,21 +18,13 @@ const redirectTo = (dir, page) => {
     console.log(error)
     return 'Can\'t load page'
   }
-
 }
 
-const sortRoutes = (routes) => {
-  // TODO - we need to sort by name then by length
-  return routes.sort((itm1, itm2) => {
-    const item1 = itm1.path.split('/')
-    const item2 = itm2.path.split('/')
-    return item1.length === item2.length ? item1[item1.length - 1].length - item2[item2.length - 1].length : item1.length - item2.length
-  })
-}
+const regex = p => new RegExp("^" + p.replace(/:[^\s/]+/g, '([\\w-]+)') + "$")
 
 module.exports = {
   isExistPath,
   getExtName,
-  sortRoutes,
   redirectTo,
+  regex
 }

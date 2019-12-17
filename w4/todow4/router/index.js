@@ -1,4 +1,4 @@
-const { sortRoutes } = require('./route-utils')
+const { sortRoutes, regex } = require('./route-utils')
 const { staticFileHandler, notFoundHandler } = require('./static-route')
 
 const GET = 'get'
@@ -9,9 +9,8 @@ const OPTION = 'option'
 
 const methods = [GET, POST, DELETE, PUSH, OPTION]
 
-// TODO use regex to match path instead of equally checking
 function match(method, path) {
-  return (itm) => itm.method === method && itm.path === path
+  return (route) => route.method === method && !!path.match(route.path)
 }
 
 class Router {
@@ -30,7 +29,7 @@ class Router {
 
   staticRoute(staticDir, baseUrl) {
     this.staticRoute = {
-      url: baseUrl,
+      path: new RegExp(`^${baseUrl.replace(/:[^\s/]+/g, '([\\w-]+)')}(\/?$|\/.*)`),
       method: 'get',
       handler: staticFileHandler(staticDir, baseUrl)
     }
@@ -40,37 +39,30 @@ class Router {
     let matcher = match(method, path)
     const isExist = this.routes.some(matcher)
     if (!isExist) {
-      const route = { method, path, handler }
+      const route = { method, path: regex(path), handler }
       this.routes.push(route)
-      this.routes = sortRoutes(this.routes)
     } else {
       throw new Error(`${method}: ${path} already existed`)
     }
   }
 
   addAll(routes) {
-    let routeArr = routes.map(r => Object.assign({ method: 'get' }, r))
+    let routeArr = routes.map(r => Object.assign({ method: 'get' }, r, { path: regex(r.path) }))
     // check existed and throw error
     let existed = this.routes.find(r => !!routeArr.find(it => it.method === r.method && it.path === r.path))
     if (existed) throw new Error(`${existed.method}: ${existed.path} already existed`)
     this.routes.push(...routeArr)
-    this.routes = sortRoutes(this.routes)
   }
 
   async handle(req, res) {
     const method = req.method.toLowerCase()
     const path = req.url
     let matcher = match(method, path)
-    const route = this.routes.find(matcher)
 
-    if (route) {
-      await route.handler(req, res)
-    } else if (this.staticRoute && path.startsWith(this.staticRoute.url)) {
-      // TODO combine this with abote route
-      await this.staticRoute.handler(req, res)
-    } else {
-      await notFoundHandler(req, res)
-    }
+    let allRoutes = [...this.routes, this.staticRoute]
+    const route = allRoutes.find(matcher) || { handler: notFoundHandler }
+
+    await route.handler(req, res)
   }
 }
 
