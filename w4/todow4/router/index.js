@@ -1,17 +1,16 @@
+const { sortRoutes, regex } = require('./route-utils')
+const { staticFileHandler, notFoundHandler } = require('./static-route')
+
 const GET = 'get'
 const POST = 'post'
 const DELETE = 'delete'
 const PUSH = 'push'
 const OPTION = 'option'
 
-const fs = require("fs"); 
-const pathRoot = require('path');
-
 const methods = [GET, POST, DELETE, PUSH, OPTION]
-const folderUtils = require('./folder-util')
-// TODO use regex to match path instead of equally checking
+
 function match(method, path) {
-  return (itm) => itm.method === method && itm.path === path
+  return (route) => route.method === method && !!path.match(route.path)
 }
 
 class Router {
@@ -28,11 +27,19 @@ class Router {
     this.handle = this.handle.bind(this)
   }
 
+  staticRoute(staticDir, baseUrl) {
+    this.staticRoute = {
+      path: new RegExp(`^${baseUrl.replace(/:[^\s/]+/g, '([\\w-]+)')}(\/?$|\/.*)`),
+      method: 'get',
+      handler: staticFileHandler(staticDir, baseUrl)
+    }
+  }
+
   _add(method, path, handler) {
     let matcher = match(method, path)
     const isExist = this.routes.some(matcher)
     if (!isExist) {
-      const route = { method, path, handler }
+      const route = { method, path: regex(path), handler }
       this.routes.push(route)
     } else {
       throw new Error(`${method}: ${path} already existed`)
@@ -40,7 +47,7 @@ class Router {
   }
 
   addAll(routes) {
-    let routeArr = routes.map(r => Object.assign({ method: 'get' }, r))
+    let routeArr = routes.map(r => Object.assign({ method: 'get' }, r, { path: regex(r.path) }))
     // check existed and throw error
     let existed = this.routes.find(r => !!routeArr.find(it => it.method === r.method && it.path === r.path))
     if (existed) throw new Error(`${existed.method}: ${existed.path} already existed`)
@@ -51,26 +58,11 @@ class Router {
     const method = req.method.toLowerCase()
     const path = req.url
     let matcher = match(method, path)
-    console.log(path.slice(1));
-    const route = this.routes.find(matcher)
-    if (route) {
-      await route.handler(req, res)
-    } else {
-      const a = await folderUtils.checkFile(path.slice(1));
-      if (a === false) {
-        // const directoryPath = pathRoot.join(__dirname, path.slice(1));
-        const files = fs.readdirSync(path.slice(1));
-        res.statusCode = 200;
-        res.end(files.join(', '));
-      } else if (a === true) {
-        const file = fs.readFileSync(path.slice(1));
-        res.statusCode = 200;
-        res.end(file);
-      } else {
-        res.statusCode = 404;
-        res.end('page not found');
-      }
-    }
+
+    let allRoutes = [...this.routes, this.staticRoute]
+    const route = allRoutes.find(matcher) || { handler: notFoundHandler }
+
+    await route.handler(req, res)
   }
 }
 

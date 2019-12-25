@@ -5,7 +5,7 @@ const resolve = path.resolve
 const staticPath = resolve(__dirname, 'public')
 
 const redirectTo = (page) => {
-    
+    console.log(resolve(staticPath, page))
     try {
         let file = fs.readFileSync(resolve(staticPath, page))
         return file
