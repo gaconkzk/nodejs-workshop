@@ -14,6 +14,7 @@ start = async ({port, ip, folder}) => {
 
   // route for static path
   // will serve under baseUrl, default should be '/'
+  // FIXME can't serve when use '/'
   router.staticRoute(folder, '/static')
 
   // sample single route

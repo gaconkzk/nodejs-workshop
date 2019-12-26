@@ -7,7 +7,7 @@ let password = process.env.DB_PASS
 let dbhost = process.env.DB_HOST_PORT
 let database = process.env.DB_NAME
 
-let url = `mongodb://${username}:${encodeURIComponent(password)}@${dbhost}/${database}`
+let url = `mongodb+srv://${username}:${encodeURIComponent(password)}@${dbhost}/${database}`
 
 // Create a new MongoClient
 const client = new MongoClient(url, { useUnifiedTopology: true });
@@ -25,7 +25,7 @@ client.connect(function(err) {
 // TODO
   // use a database using dbName
   // create a collections name `users`
-  // insert at least two users:
+  // insert at least 3 users:
   /*
       {
           "fullName": "A Thi No",
@@ -34,5 +34,8 @@ client.connect(function(err) {
       }
    */
 // document sample: https://mongodb.github.io/node-mongodb-native/3.4/quick-start/quick-start/
+  // update at least 1 users
+  // delete a user
+  // find a user with fullname contain 'Thi'
   client.close()
 })
