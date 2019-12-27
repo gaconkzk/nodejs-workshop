@@ -1,5 +1,11 @@
 # frontend
 
+I. TODO:
+  
+  - Create a view/page for register new user (add new user)
+  - Create a view/page for listing all registered users (list all user)
+  - Create a view/page for edit registered user (edit user)
+
 ## Project setup
 ```
 yarn install
