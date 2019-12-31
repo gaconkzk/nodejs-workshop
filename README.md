@@ -59,3 +59,10 @@ Make a simple CLI
   #### Database
   #### Regex matcher for router
   #### TBA
+ 
+### Week 6:
+  #### TODO and Refactoring review
+  #### Faking REST api using json-server
+  #### express
+  #### initialize a Vue app using vue-cli
+
