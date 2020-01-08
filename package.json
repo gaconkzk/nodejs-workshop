@@ -7,6 +7,7 @@
     "w3:run": "nodemon node w3/http.js",
     "w4:todo": "nodemon node w4/todow4/server.js",
     "w5:run": "node w5/database.js",
+    "w6": "nodemon node w6/server.js",
     "helpme": "ls -la",
     "prehelpme": "echo pre",
     "posthelpme": "echo post",
@@ -24,6 +25,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "mongodb": "^3.4.0",
     "yargs": "^15.0.2"
   },
