@@ -2,8 +2,7 @@ import Vue from 'vue'
 
 import 'normalize.css/normalize.css'
 
-import './plugins/element'
-import './plugins/vue-awesome'
+import './plugins'
 
 import App from './App.vue'
 import './registerServiceWorker'

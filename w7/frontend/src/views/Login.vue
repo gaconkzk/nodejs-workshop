@@ -7,7 +7,7 @@
       .form-wrapper.image-after-login
         .flip-img-wrapper
           transition(name="fade-profile-pic")
-            img.user-profile(v-if="name === 'user'" :src="imgSrc" alt="user-profile-pic" v-image)
+            img.user-profile(v-if="name === 'user'" :src="imgSrc" alt="user-profile-pic")
             icon.user-icon.image-after-login(v-if="name !== 'user'" name="user-circle")
         form.animate-form
           .textbox-wrapper
@@ -20,18 +20,29 @@
               icon(name="lock")
           button.btn.submit-btn(type="submit" v-on:click.prevent="onSubmit")
             span.login-text LOGIN
-          p.text Forgot your password?
-          p.text.footer-text Already have acount? Sign In
+          p.text Forgot your password? Click
+          p.text Already have acount? Sign In
+          p.text.footer-text Register your new account
+          button.btn.submit-btn(type="button" v-on:click.prevent="onRegister")
+            span.login-text REGISTER
+          google-login(:params="params" id="gools")
+            icon(name="brands/google" color="white")
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login'
+
 export default {
+  components: { GoogleLogin },
   data() {
     return {
       show: false,
       name: '',
       pass: '',
-      imgSrc: require('@/assets/userTwo.jpg')
+      imgSrc: require('@/assets/userTwo.jpg'),
+      params: {
+        client_id: "x"
+      }
     }
   },
   methods: {
@@ -39,7 +50,12 @@ export default {
       this.show = true
       setTimeout(() => {
         this.$router.push('/dashboard')
-      }, 5000)
+      }, 2000)
+    },
+    onRegister() {
+      setTimeout(() => {
+        this.$router.push('/register')
+      }, 1000)
     },
     customHook() {
       console.log('on render')
@@ -69,4 +85,12 @@ export default {
 
 @import '@/styles/views/login-page.scss'
 
+</style>
+
+<style lang="stylus" scoped>
+#gools
+  background-color blue
+  border-radius 5px
+  margin-top 5px
+  padding-top 5px
 </style>

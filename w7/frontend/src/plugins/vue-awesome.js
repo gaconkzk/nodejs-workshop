@@ -9,6 +9,8 @@ import 'vue-awesome/icons/cog'
 import 'vue-awesome/icons/spinner'
 import 'vue-awesome/icons/check-circle'
 import 'vue-awesome/icons/book'
+import 'vue-awesome/icons/heart'
+import 'vue-awesome/icons/brands/google'
 import Icon from 'vue-awesome/components/Icon'
 
 Vue.component('Icon', Icon)
