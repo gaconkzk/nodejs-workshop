@@ -1,5 +1,5 @@
 <template lang="pug">
-.wrapper(:class="[show ? 'activeClass' : '']")
+.wrapper(:class="[show]")
   .preload
   .placeholder
   transition(name="trial" appear)
@@ -36,7 +36,7 @@ export default {
   components: { GoogleLogin },
   data() {
     return {
-      show: false,
+      show: '',
       name: '',
       pass: '',
       imgSrc: require('@/assets/userTwo.jpg'),
@@ -47,15 +47,16 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.show = true
+      this.show = 'activeDashboard'
       setTimeout(() => {
         this.$router.push('/dashboard')
       }, 2000)
     },
     onRegister() {
+      this.show = 'activeRegister'
       setTimeout(() => {
         this.$router.push('/register')
-      }, 1000)
+      }, 2000)
     },
     customHook() {
       console.log('on render')

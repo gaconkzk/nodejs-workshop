@@ -2,6 +2,8 @@ import Vue from 'vue'
 
 import 'normalize.css/normalize.css'
 
+import 'animate.css/animate.css'
+
 import './plugins'
 
 import App from './App.vue'

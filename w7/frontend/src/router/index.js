@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Splash from '@/views/Splash.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Login from '@/views/Login.vue'
+import Register from '@/views/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register
   }
 ]
 

@@ -27,7 +27,7 @@ export default {
   filter grayscale(30%)
   .component-wrapper
     box-shadow 5px 5px 5px 5px rgba(0, 0, 0, 0.2)
-    height 100%
     background white
     overflow hidden
+    height 100%
 </style>

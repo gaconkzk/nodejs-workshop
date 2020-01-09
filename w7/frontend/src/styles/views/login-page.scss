@@ -118,7 +118,23 @@
     }
   }
 
-  &.activeClass {
+  &.activeDashboard {
+    .form-wrapper {
+      animation: formAnimation 2s 1 normal forwards;
+    }
+
+    .animate-form {
+      animation: hideForm 0.3s ease-in-out 0.5s 1 normal forwards;
+    }
+
+    .preload {
+      transform: translateX(-300vw);
+      transition: all ease-in-out 1s;
+    }
+  }
+
+
+  &.activeRegister {
     .form-wrapper {
       animation: formAnimation 2s 1 normal forwards;
     }

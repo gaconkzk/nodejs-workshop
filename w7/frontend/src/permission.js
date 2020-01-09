@@ -6,7 +6,7 @@ import NProgress from 'nprogress'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login', '/dashboard', '/splash']
+const whiteList = ['/login', '/dashboard', '/splash', '/register']
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
