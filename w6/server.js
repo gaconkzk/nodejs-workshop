@@ -1,10 +1,14 @@
 const express = require('express')
+const history = require('connect-history-api-fallback')
 const app = express()
 const port = process.env.PORT || 3000
 
 const path = require('path')
 
-app.use(express.static(path.resolve(__dirname, 'www')))
-app.get('/', (req, res) => res.send('Hello World!'))
+staticMiddleware = express.static(path.resolve(__dirname, 'frontend', 'dist'))
+
+app.use(staticMiddleware)
+
+app.use(history())
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
