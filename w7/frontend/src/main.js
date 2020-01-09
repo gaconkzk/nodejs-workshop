@@ -20,3 +20,11 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+// TODO w7
+/*
+  - skip button in splash screen
+  - if already skipped do not display again (use js-cookies)
+  - Dashboard show list users instead of parties
+  - link with backend/mongodb
+*/
