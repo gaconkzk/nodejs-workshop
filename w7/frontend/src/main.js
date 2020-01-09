@@ -1,9 +1,16 @@
 import Vue from 'vue'
+
+import 'normalize.css/normalize.css'
+
+import './plugins/element'
+import './plugins/vue-awesome'
+
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import './plugins/element.js'
+
+import './permission'
 
 Vue.config.productionTip = false
 
