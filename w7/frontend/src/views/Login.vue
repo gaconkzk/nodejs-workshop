@@ -9,26 +9,19 @@
           transition(name="fade-profile-pic")
             img.user-profile(v-if="name === 'user'" :src="imgSrc" alt="user-profile-pic")
             icon.user-icon.image-after-login(v-if="name !== 'user'" name="user-circle")
-        form.animate-form
-          .textbox-wrapper
-            input.text-box(v-model="name" type="text" autocomplete="username")
-            span.user-o-icon
-              icon(name="user")
-          .textbox-wrapper
-            input.text-box(v-model="pass" type="password" autocomplete="current-password")
-            span.lock-icon
-              icon(name="lock")
-          button.btn.submit-btn(type="submit" v-on:click.prevent="onSubmit")
-            span.login-text LOGIN
-          p.text Forgot your password? Click
-          p.text Already have acount? Sign In
-          p.text.footer-text Register your new account
-          button.btn.submit-btn(type="button" v-on:click.prevent="onRegister")
-            span.login-text REGISTER
-          google-login(:params="params" id="gools")
-            icon(name="brands/google" color="white")
-          button.btn.submit-btn(type="button" v-on:click.prevent="splash")
+        el-form.animate-form
+          el-form-item
+            el-input(v-model="name" autocomplete="username")
+          el-form-item
+            el-input(v-model="pass" autocomplete="current-password"  show-password)
+          el-form-item
+            el-button(type="primary" v-on:click.prevent="onSubmit") LOGIN
+            el-button(v-on:click.prevent="onRegister") REGISTER
+
+          //- button.btn.submit-btn(type="button" v-on:click.prevent="splash")
             span.login-text SPLASH
+          //- google-login(:params="params" id="gools")
+          //-   icon(name="brands/google" color="white")
 </template>
 
 <script>
@@ -93,4 +86,14 @@ export default {
   border-radius 5px
   margin-top 5px
   padding-top 5px
+.el-input
+  margin-top 15px
+  svg
+    margin-top 10px
+    margin-right 5px
+
+>>>.el-form-item__content
+  display flex
+.el-button
+  margin-right 10px
 </style>
