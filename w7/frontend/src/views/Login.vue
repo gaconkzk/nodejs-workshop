@@ -27,6 +27,8 @@
             span.login-text REGISTER
           google-login(:params="params" id="gools")
             icon(name="brands/google" color="white")
+          button.btn.submit-btn(type="button" v-on:click.prevent="splash")
+            span.login-text SPLASH
 </template>
 
 <script>
@@ -41,7 +43,7 @@ export default {
       pass: '',
       imgSrc: require('@/assets/userTwo.jpg'),
       params: {
-        client_id: "x"
+        client_id: process.env.VUE_APP_GOOGLE_CLIENT_ID
       }
     }
   },
@@ -58,11 +60,8 @@ export default {
         this.$router.push('/register')
       }, 2000)
     },
-    customHook() {
-      console.log('on render')
-    },
-    click() {
-      console.log('clicked')
+    splash() {
+      this.$router.replace('/splash')
     },
     beforeCreate() {
       let imageOne = new Image()

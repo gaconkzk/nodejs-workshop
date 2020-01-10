@@ -15,7 +15,8 @@
     "posthelpme": "echo post",
     "test": "echo \"Error: no test specified\" && exit 1",
     "w4:denv": "node w4/testdotenv.js",
-    "prew6": "cd w6/frontend && yarn build"
+    "prew6": "cd w6/frontend && yarn build",
+    "webdev": "npm-run-all --parallel w7 w7:web"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "yargs": "^15.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "npm-run-all": "^4.1.5"
   }
 }

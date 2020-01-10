@@ -20,5 +20,5 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach(() => {
-  NProgress.end()
+  NProgress.done()
 })

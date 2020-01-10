@@ -15,12 +15,11 @@
 export default {
   name: 'SplashScreen',
   data () {
+    let quote = 'BUILD WITH x AT f THE FLIES'.split('')
+    let logoName = quote.map(c => c === 'x' ? 'heart' : (c === 'f' ? 'img' : c))
     return {
       show: true,
-      logoName: [
-        'B', 'U', 'I', 'L', 'T', '  ', 'W', 'I', 'T', 'H',
-        ' ', '<3', ' ', 'A', 'T', '  ', 'img', '  ', 'G',
-        'E', 'E', 'K', 'Y', 'A', 'N', 'T', 'S']
+      logoName
     }
   },
   methods: {
@@ -31,6 +30,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@/styles/views/splash.scss'
+<style lang="stylus" scoped>
+@import '~@/styles/views/splash'
 </style>
