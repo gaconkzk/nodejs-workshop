@@ -1,4 +1,5 @@
 const express = require('express')
+const history = require('connect-history-api-fallback')
 const app = express()
 require('dotenv').config()
 const port = process.env.PORT || 3001
@@ -22,8 +23,8 @@ mongoose.connection.once("open", function(callback){
   console.log("Connection Succeeded");
 });
 
-app.use(express.static(path.resolve(__dirname, 'www')))
-app.get('/', (req, res) => res.send('Hello World!'))
+staticMiddleware = express.static(path.resolve(__dirname, 'frontend', 'dist'))
+
 app.get('/users', (req, res) => {
     Users.find({}, function (error, users) {
         if (error) { console.error(error); }
