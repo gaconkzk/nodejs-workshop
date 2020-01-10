@@ -7,7 +7,10 @@ let password = process.env.DB_PASS
 let dbhost = process.env.DB_HOST_PORT
 let database = process.env.DB_NAME
 
-let url = `mongodb+srv://${username}:${encodeURIComponent(password)}@${dbhost}/${database}`
+let dbAuth = username && password ? `${username}:${encodeURIComponent(password)}@` : '';
+let dbProtocol = `mongodb${dbhost.indexOf(':') < 0 ? '+srv' : ''}`
+
+let url = `${dbProtocol}://${dbAuth}${dbhost}/${database}`
 
 // Create a new MongoClient
 const client = new MongoClient(url, { useUnifiedTopology: true });

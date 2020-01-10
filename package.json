@@ -8,11 +8,14 @@
     "w4:todo": "nodemon node w4/todow4/server.js",
     "w5:run": "node w5/database.js",
     "w6": "nodemon node w6/server.js",
+    "w7": "nodemon node w7/server.js",
+    "w7:web": "cd w7/frontend && yarn serve",
     "helpme": "ls -la",
     "prehelpme": "echo pre",
     "posthelpme": "echo post",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "w4:denv": "node w4/testdotenv.js"
+    "w4:denv": "node w4/testdotenv.js",
+    "prew6": "cd w6/frontend && yarn build"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "connect-history-api-fallback": "^1.6.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.4.0",
