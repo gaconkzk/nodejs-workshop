@@ -9,17 +9,17 @@
           transition(name="fade-profile-pic")
             img.user-profile(v-if="name === 'user'" :src="imgSrc" alt="user-profile-pic")
             icon.user-icon.image-after-login(v-if="name !== 'user'" name="user-circle")
-        el-form.animate-form(label-position="left" label-width="85px")
-          el-form-item(label="username")
+        el-form.animate-form
+          el-form-item
             el-input(v-model="name" autocomplete="username")
-          el-form-item(label="password")
+          el-form-item
             el-input(v-model="pass" autocomplete="current-password"  show-password)
 
           div.reg(v-if="registering")
-            el-form-item(label="fullname")
-              el-input(v-model="fullName")
-            el-form-item(label="email")
-              el-input(v-model="email")
+            el-form-item
+              el-input(v-model="fullName" placeholder="fullname")
+            el-form-item
+              el-input(v-model="email" placeholder="email")
 
           el-form-item.action
             icon(v-if="registering" name="arrow-left" slot="label" @click="registering = false" style="cursor: pointer")
@@ -55,21 +55,12 @@ export default {
       }, 2000)
     },
     onRegister() {
+      this.show = 'activeRegister'
       if (this.registering) {
         // do real register
       } else {
         this.registering = true
       }
-
-      // let opacity = this.registering ? 1 : 0
-
-      // this.$nextTick(() => {
-      //   this.$anime({
-      //     targets: '.reg',
-      //     height: 94,
-      //     duration: 5000
-      //   })
-      // })
     },
     splash() {
       this.$router.replace('/splash')
@@ -102,8 +93,4 @@ export default {
   border-radius 5px
   margin-top 5px
   padding-top 5px
-
-.reg
-  margin-down 15px
-
 </style>
