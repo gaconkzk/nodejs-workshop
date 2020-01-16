@@ -9,17 +9,17 @@
           transition(name="fade-profile-pic")
             img.user-profile(v-if="name === 'user'" :src="imgSrc" alt="user-profile-pic")
             icon.user-icon.image-after-login(v-if="name !== 'user'" name="user-circle")
-        el-form.animate-form
+        el-form.animate-form(autocomplete="off")
           el-form-item
-            el-input(v-model="name" autocomplete="username")
+            el-input(v-model="name" placeholder="username" :autocomplete="!registering ? 'username' : 'off'")
           el-form-item
-            el-input(v-model="pass" autocomplete="current-password"  show-password)
+            el-input(v-model="pass" placeholder="password" :autocomplete="!registering ? 'current-password' : 'new-password'"  show-password)
 
           div.reg(v-if="registering")
             el-form-item
-              el-input(v-model="fullName" placeholder="fullname")
+              el-input(v-model="fullName" placeholder="fullname" autocomplete="name")
             el-form-item
-              el-input(v-model="email" placeholder="email")
+              el-input(v-model="email" placeholder="email" autocomplete="email")
 
           el-form-item.action
             icon(v-if="registering" name="arrow-left" slot="label" @click="registering = false" style="cursor: pointer")
@@ -29,6 +29,8 @@
 
 <script>
 import GoogleLogin from 'vue-google-login'
+
+import api from '@/services/auth'
 
 export default {
   components: { GoogleLogin },
@@ -48,16 +50,34 @@ export default {
     }
   },
   methods: {
+    clearInput() {
+      this.name = ''
+      this.pass = ''
+      this.email = ''
+      this.fullName = ''
+    },
     onSubmit() {
       this.show = 'activeDashboard'
       setTimeout(() => {
         this.$router.push('/dashboard')
       }, 2000)
     },
-    onRegister() {
+    async onRegister() {
       this.show = 'activeRegister'
+      this.clearInput()
       if (this.registering) {
-        // do real register
+        try {
+          console.log(api)
+          let user = await api.register({
+            name: this.name,
+            pass: this.pass,
+            email: this.email,
+            fullName: this.fullName
+          })
+          console.log('new user',user)
+        } catch (err) {
+          console.error('Can\'t register new user', err)
+        }
       } else {
         this.registering = true
       }

@@ -17,10 +17,10 @@
     .events
       .events-data
         p.counts
-          | 156
+          | {{totalAccounts}}
         p
         p
-          | friends
+          | users
       .events-data
         p.counts
           | 182
@@ -95,6 +95,8 @@
 </template>
 
 <script>
+import api from '@/services/accounts'
+
 export default {
   name: 'DashboardScreen',
   data () {
@@ -105,13 +107,23 @@ export default {
       urlThree: require('../assets/userThree.jpeg'),
       eventOne: require('../assets/eventOne.jpg'),
       eventTwo: require('../assets/eventTwo.jpg'),
-      eventThree: require('../assets/eventThree.jpeg')
+      eventThree: require('../assets/eventThree.jpeg'),
+      accounts: [],
+    }
+  },
+  computed: {
+    totalAccounts() {
+      return this.accounts.length
     }
   },
   methods: {
     customAfterAppearHook() {
       this.show = true
     }
+  },
+  async mounted() {
+    let result = await api.all()
+    this.accounts = result.data || []
   }
 }
 </script>
